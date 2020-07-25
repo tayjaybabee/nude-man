@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "nude-man"
+version = "0.1.0"
+description = ""
+authors = ["taylor <tayjaybabee@gmail.com>"]
+include = ['CHANGELOG.md',
+           'README.rst',
+           'nude_man/conf/example.conf']
+
+[tool.poetry.dependencies]
+python = "^3.8"
+requests = "^2.24.0"
+Pillow = "^7.2.0"
+tqdm = "^4.48.0"
+halo = "^0.0.29"
+inspy-logger = "^1.0.3"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+ipython = "^7.16.1"
+autopep8 = "^1.5.3"
+pylint = "^2.5.3"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

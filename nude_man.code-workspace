@@ -1,0 +1,13 @@
+{
+  "folders": [
+	{
+		"name": "nude_man",
+		"path": "."
+	},
+	{
+		"name": "scripts",
+		"path": "../nsfw_scanner/scripts"
+	}
+],
+  "settings": {}
+}
