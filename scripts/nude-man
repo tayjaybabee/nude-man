@@ -4,8 +4,14 @@
 
 @author: taylor
 """
+import nude_man
+from nude_man import DEFAULT_DATA_DIR
+from nude_man.lib.config.args import parse
+from nude_man.lib.config.environment import Environment
+from nude_man.lib.config import Config
+
+from inspy_logger import start as start_logger
 import requests
-import argparse
 from glob import glob
 from pathlib import Path
 import PIL.Image as Image
@@ -13,8 +19,6 @@ import tqdm
 import os
 from halo import Halo
 import enum
-
-DEFAULT_DATA_DIR = os.path.expanduser("~/Inspyre-Softworks/NudeMan")
 
 
 # Enum for size units
@@ -31,6 +35,26 @@ class SizeCodex(object):
         self.KB = self.B * 1024
         self.MB = self.KB * 1024
         self.GB = self.MB * 1024
+
+
+class APIError(Exception):
+    def __init__(self):
+        self.api_url = 'https://deepai.org'
+        self.message = 'An error of type APIError has occurred'
+
+
+class KeyMissingError(APIError):
+    def __init__(self):
+        super().__init__()
+        self.message += f'\nThere is no API key from {self.api_url} configured in nude-man.conf.'
+        self.message += '\nRun "nude-man configure" or edit nude-man.conf'
+
+
+class InvalidKeyError(APIError):
+    def __init__(self, key):
+        super().__init__()
+        self.message += '\nInvalid API Key in specified in configuration file!'
+        self.message += f'\nCurrently configured key: {key}'
 
 
 def get_checksum(file):
@@ -143,19 +167,26 @@ def conclude():
 
 
 def main():
-    parser = arg_parser()
 
-    config = Config()
+    args = parse()
 
-    args = parser.parse_args()
+    env = Environment(args)
 
-    start_dir = args.start_dir
+    _conf = Config(args.data_store)
+
+    config = _conf.conf
+
+    print(config.sections())
+
+    start_dir = args.source_start
+
+    log = start_logger('NudeMan', args.verbose)
 
     if start_dir:
         if "~" in start_dir:
             start_dir = os.path.expanduser(start_dir)
         else:
-            start_dir = str(args.start_dir)
+            start_dir = str(args.source_start)
     else:
         start_dir = os.getcwd()
 
@@ -168,7 +199,7 @@ def main():
         res = requests.post(
             "https://api.deepai.org/api/nsfw-detector",
             files={"image": open(_file["filepath"], "rb"), },
-            headers={"api-key": "YOUR KEY"},
+            headers={"api-key": "{api_key}"},
         )
         out_name = _file["name"]
         data = res.json()
@@ -176,6 +207,12 @@ def main():
         if "err" in data.keys():
             out("Error processing image!")
             continue
+        if 'status' in data.keys():
+            if 'Please pass a valid Api-Key' in data['status']:
+                if config['SETTINGS']['api-key']:
+                    raise InvalidKeyError(config['SETTINGS']['api-key'])
+                else:
+                    raise KeyMissingError()
 
         data_str = str(data)
         out(data_str)
@@ -195,4 +232,11 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except InvalidKeyError as e:
+        print(e.message)
+        raise
+    except KeyMissingError as e:
+        print(e.message)
+        raise
