@@ -169,18 +169,17 @@ def conclude():
 def main():
 
     args = parse()
+    log = start_logger('NudeMan', args.verbose)
 
     env = Environment(args)
 
-    _conf = Config(args.data_store)
+    _conf = Config(args, env)
 
     config = _conf.conf
 
     print(config.sections())
 
     start_dir = args.source_start
-
-    log = start_logger('NudeMan', args.verbose)
 
     if start_dir:
         if "~" in start_dir:

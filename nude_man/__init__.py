@@ -4,7 +4,7 @@ from logging import getLogger
 
 __version__ = '0.1.0'
 
-DEFAULT_DATA_DIR = '~/Inspyre-Softworks/NudeMan/conf/nude-man.conf'
+DEFAULT_DATA_DIR = '~/Inspyre-Softworks/NudeMan'
 APP_NAME = 'NudeMan'
 
 log_name = str(f'{APP_NAME}.Main')

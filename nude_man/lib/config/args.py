@@ -23,33 +23,52 @@ def parse():
         help='Enable verbose output to the console.'
     )
 
-    parser.add_argument("-s",
-                        "--source-start",
-                        type=str,
-                        action="store",
-                        help="Indicate the directory the program should start its scan in",
-                        )
-
-    parser.add_argument("-o",
-                        "--output-directory",
-                        type=dir_path,
-                        action='store',
-                        help="Indicate where the files we find should be swept away to."
+    parser.add_argument('-d',
+                        '--dry-run',
+                        action='store_true',
+                        default=False,
+                        help='Passing this flag will run the program as usual but skips the step at the end where it copies the files it finds.'
                         )
 
     parser.add_argument('-k',
                         '--api-key',
                         type=str,
                         action='store',
-                        help='The API key that you get when you register for free at https://deepai.org/')
+                        help='The API key that you get when you register for free at https://deepai.org/'
+                        )
 
-    parser.add_argument('-d',
-                        '--data-store',
+    parser.add_argument('-t',
+                        '--threshold',
+                        type=float,
+                        action='store',
+                        default=0.75,
+                        help='Any float value between 0.00 and 1.00. If the program gives a photo a "NSFW Score" '
+                        'that falls above this number, it will be flagged for sweeping.'
+                        )
+
+    parser.add_argument('--data-store',
                         type=str,
                         action='store',
                         required=False,
-                        default=f'{Path("~/Inspyre-Softworks/NudeMan").expanduser()}',
-                        help=f'Provide a directory for NudeMan to store it\'s data in, if you\'re unhappy with the default: {DEFAULT_DATA_DIR}')
+                        default=f'{str(Path("~/Inspyre-Softworks/NudeMan").expanduser())}',
+                        help=f'Provide a directory for NudeMan to store it\'s data in, if you\'re unhappy with the default: {DEFAULT_DATA_DIR}'
+                        )
+
+    parser.add_argument("-s",
+                        "--source-start",
+                        type=str,
+                        action="store",
+                        default=f'{str(Path("~/Inspyre-Softworks/NudeMan/data/input").expanduser())}',
+                        help="Indicate the directory the program should start its scan in",
+                        )
+
+    parser.add_argument("-o",
+                        "--output-directory",
+                        type=str,
+                        action='store',
+                        default=f'{str(Path("~/Inspyre-Softworks/NudeMan/data/output").expanduser())}',
+                        help="Indicate where the files we find should be swept away to."
+                        )
 
     return parser.parse_args()
 
