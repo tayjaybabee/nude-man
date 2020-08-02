@@ -4,22 +4,29 @@
 
 @author: taylor
 """
-import nude_man
-from nude_man import DEFAULT_DATA_DIR
-from nude_man.lib.config.args import parse
-from nude_man.lib.config.environment import Environment
-from nude_man.lib.config import Config
-
-from inspy_logger import start as start_logger
-import requests
+import enum
+import json
+import os
+import shutil
 from glob import glob
 from pathlib import Path
+
+import subprocess
+from nude_man.lib.config import default_data_out
+from time import sleep
+from logging import getLogger
+
 import PIL.Image as Image
+import requests
 import tqdm
-import os
 from halo import Halo
-import enum
-import shutil
+from inspy_logger import start as start_logger
+
+import nude_man
+from nude_man import DEFAULT_DATA_DIR
+from nude_man.lib.config import default_data_out, default_data_in, Config
+from nude_man.lib.config.args import parse
+from nude_man.lib.config.environment import Environment
 
 pic_num = 0
 
@@ -59,6 +66,21 @@ class InvalidKeyError(APIError):
         super().__init__()
         self.message += '\nInvalid API Key in specified in configuration file!'
         self.message += f'\nCurrently configured key: {key}'
+
+
+class NudeManError(Exception):
+    def __init__(self):
+        pass
+
+
+class OutDirNonexistantError(NudeManError):
+    def __init__(self):
+        """__init__ An exception class indicating that a non-existant output-directory was specified.
+
+        An exception class for use in advising the user that the output directory that was specified in either the command-line arguments or in the configuration file does not exist.
+        """
+        super().__init__()
+        self.message = 'The specified output directory does not exist!'
 
 
 def get_checksum(file):
@@ -166,14 +188,87 @@ def out(msg: str):
     tqdm.tqdm.write(msg)
 
 
-def conclude(args, processed, config):
+def conclude(args, processed, dest):
+    log_name = 'NudeMan.conclude'
+    log = getLogger(log_name)
+    debug = log.debug
+
+    debug(f'Logger started for "{log_name}"')
+    debug(f'Received {len(processed)} files to move')
+
     if args.dry_run:
         pass
     else:
-        c_out = args.output_directory
-        f_out = config['SETTINGS']['output-dir']
         for file in processed:
-            shutil.copy()
+            fp = Path(str(dest) + f'/{file["name"]}.{file["ext"]}')
+            try:
+                shutil.copy(file['filepath'], fp)
+            except NotADirectoryError as e:
+                log.warning(
+                    f'Unable to find directory I need to write these pictures into: {dest}')
+                confirm = makedir_confirm(dest)
+                if confirm in [1, 2, 3]:
+                    os.makedirs(dest)
+                    if confirm == 1:
+                        debug(
+                            f'User indicated a desire to continue with a new directory structure for application output for one time: {dest}')
+
+
+def makedir_confirm(directory):
+
+    log_name = 'NudeMan.makedir_confirm'
+    log = getLogger(log_name)
+    log.debug(f'Started logger for {log_name}')
+
+    str_dir = str(directory)
+    q_choices = [
+
+        '1. Yes.',
+        f'2. Yes, and change the config file option to {str_dir} as well.',
+        '3. Yes, always create new output directories passed via command line.',
+        '4. No.',
+        '5. No, and never create new output directories if passed via command line.',
+        '6. Let me enter in a new directory.',
+        f'7. Use default output directory: {default_data_out}\n'
+    ]
+    q = f'Intended Output Directory: {str_dir}\n\n'
+    q += '\n'.join(q_choices) + '\n'
+    q += 'Since I was unable to find the given output directory, would you like me to create it?: '
+
+    a_nums = []
+
+    for i in range(1, len(q_choices) + 1):
+        a_nums.append(i)
+
+    confirmed = False
+
+    while not confirmed:
+        try:
+            a = int(input(q))
+        except ValueError as e:
+            e_msg = e.__str__()
+            msg_match = 'invalid literal for int' in e_msg
+
+            if msg_match:
+                log.error(
+                    'You must provide the number that coincides with what you want to do.')
+            else:
+                log.error('{e_msg}')
+                raise
+
+        if a not in a_nums:
+            log.warning(
+                f'That is not a valid choice! Please choose from {a_nums}!')
+            subprocess.run('clear')
+            for i in range(5):
+                log.warning('Not a valid choice')
+                sleep(.2)
+                subprocess.run('clear')
+                sleep(.2)
+        else:
+            confirmed = True
+
+        return
 
 
 def main():
@@ -189,7 +284,8 @@ def main():
 
     config = _conf.conf
 
-    print(config.sections())
+    log.debug(
+        f'Found a config file with the following sections: {config.sections()}')
 
     start_dir = args.source_start
 
@@ -200,6 +296,23 @@ def main():
             start_dir = str(args.source_start)
     else:
         start_dir = os.getcwd()
+
+    out_dir = config['SETTINGS']['output-dir']
+
+    if not out_dir == args.output_directory:
+
+        od = Path(args.output_directory).resolve()
+        log.debug(
+            'User specified an output directory that differs from the one loaded in the config file.')
+        if Path(od).exists:
+            out_dir = od
+        else:
+            raise OutDirNonexistantError()
+
+    else:
+        log.debug(
+            f'No custom output directory received. Falling back on default path: {args.output_directory}')
+        out_dir = args.output_directory
 
     file_paths = grab_file_paths(start_dir)
     num_files = len(file_paths)
@@ -240,7 +353,11 @@ def main():
 
     print(str(len(processed)) + ' pictures considered "NSFW"')
 
-    conclude(args, processed, config)
+    try:
+        conclude(args, processed, out_dir)
+    except OutDirNonexistantError as e:
+        log.error(e.message)
+        makedir_confirm(out_dir)
 
 
 if __name__ == "__main__":

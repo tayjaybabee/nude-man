@@ -13,6 +13,8 @@ default_app_dir_root = Path('~/Inspyre-Softworks/NudeMan/').expanduser()
 default_app_run_dir = str(default_app_dir_root) + '/run'
 default_app_conf_dir = default_app_run_dir + '/conf'
 default_data_root = str(default_app_dir_root) + '/data'
+default_data_out = str(default_data_root) + '/output'
+default_data_in = str(default_data_root) + '/input'
 
 DEFAULT_EXAMPLE_FILENAME = 'example-nude-man.conf'
 # The name of the example conf file that servers as a template config to load, but also as a template for
@@ -108,6 +110,10 @@ class Config(object):
                 'api-key': api_key,
                 'threshhold': threshold
 
+            },
+
+            'CACHE': {
+                'dnaa': []
             }
         }
         parser = ConfigParser()

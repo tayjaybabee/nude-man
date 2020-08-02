@@ -23,6 +23,12 @@ def parse():
         help='Enable verbose output to the console.'
     )
 
+    parser.add_argument('-r',
+                        '--no-recursive',
+                        action='store_true',
+                        default=False,
+                        help='Passing this flag will instruct the program not to recursively scan the source directory.')
+
     parser.add_argument('-d',
                         '--dry-run',
                         action='store_true',
