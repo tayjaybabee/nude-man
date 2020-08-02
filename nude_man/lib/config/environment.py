@@ -37,11 +37,13 @@ class Environment(object):
         self.conf_dirpath = str(
             self.current_filepath + str('../' * 3 + 'conf'))
         self.conf_filepath = self.conf_dirpath + '/env.lock'
+        self.existing = False
 
         if Path(self.conf_dirpath).resolve().exists():
 
             if Path(self.conf_filepath).resolve().is_file():
                 self.env = self.load_file()
+                self.existing = True
             else:
                 self.env = self.create(arg_parser)
         else:

@@ -14,17 +14,6 @@ default_app_run_dir = str(default_app_dir_root) + '/run'
 default_app_conf_dir = default_app_run_dir + '/conf'
 default_data_root = str(default_app_dir_root) + '/data'
 
-
-DEFAULT_CONF_DIR = os.path.expanduser(f"{DEFAULT_DATA_DIR}/conf")
-# Default location of the configuration files. Namely example-nude-man.conf & nude-man.conf
-
-DEFAULT_CONF_FILENAME = 'nude-man.conf'
-# Default filename of a configuration file that has been intentionally made and will
-# be loaded to keep persistence with last sessions settings
-
-DEFAULT_CONF_FILEPATH = Path(str(DEFAULT_CONF_DIR) + DEFAULT_CONF_FILENAME)
-# Default filepath of the configuration file.
-
 DEFAULT_EXAMPLE_FILENAME = 'example-nude-man.conf'
 # The name of the example conf file that servers as a template config to load, but also as a template for
 # users to fill-in.
@@ -33,6 +22,29 @@ DEFAULT_EXAMPLE_FILENAME = 'example-nude-man.conf'
 class NudeManConfigError(Exception):
     def __init__(self):
         self.message = 'An error of type NudeManConfigError has occurred.'
+
+
+class NotYetConfiguredError(NudeManConfigError):
+    def __init__(self):
+        """__init__   An exception class to be raised when a user attempts to
+        run the NudeMan application without first running configuring the
+        program.
+
+        This exception class will be raised if the end-user attempts to
+        run NudeMan immediately after download/install without first
+        running `$> nude-man configure` which will give the program all
+        of the parameter it needs for start-up.
+
+        """
+        super().__init__()
+        self.message += str(
+            'It seems as though NudeMan has not yet been configured. Please run the following command before attempting to run NudeMan:\n'
+            '    nude-man <-v> configure\n'
+            '\n'
+            'This command will allow you to either run through a command-line based config wizard that will ask you a few questions, or \n'
+            '- if you choose - it will create a default config file that you can edit manually.'
+
+        )
 
 
 class InvalidFileLocationError(NudeManConfigError):
@@ -67,14 +79,17 @@ class Config(object):
         path = default_data_root
         output_dir = str(Path(str(path) + '/output'))
         input_dir = str(Path(str(path) + '/input'))
+        debug(str(Path(str(path) + '/../run/conf')))
+
         debug(path)
         os.makedirs(path, exist_ok=True)
         os.makedirs(output_dir, exist_ok=True)
         os.makedirs(input_dir, exist_ok=True)
         os.makedirs(str(path), exist_ok=True)
+        os.makedirs(str(default_app_conf_dir))
 
     def write_config(self):
-        with open(f'{Path(self.data_path).expanduser()}/nude-man.conf', 'w') as fp:
+        with open(f'{Path(self.data_path).expanduser()}/run/conf/nude-man.conf', 'w') as fp:
             self.conf.write(fp)
 
     def create_config(self):
@@ -98,7 +113,10 @@ class Config(object):
         parser = ConfigParser()
         parser.read_dict(config)
         self.conf = parser
+        print(self.conf.sections())
         self.write_config()
+
+        return self.conf
 
     def load_data(self):
         parser = ConfigParser()
@@ -128,13 +146,16 @@ class Config(object):
                 'There\'s already an \'env.lock\' file present, indicating a differing directory in which to store app-data')
             log.info(
                 'You can continue without permanently modifying the applications data directory for future runs')
-            confirm_overwrite = input('1.) Use the new data directory from now on.\n'
-                                      '2.) Do not modify future run behavior. Just this once.\n'
-                                      '3.) Use pre-existing configuration, change nothing in this or future runs.\n'
-                                      '4.) Quit.\n'
-                                      '\n'
-                                      'What would you like to do? (Please enter a number): ')
-
+            confirm_overwrite = input(
+                '\n'
+                f'Path provided by command line: args.+'
+                '\n'
+                '1.) Use the new data directory from now on.\n'
+                '2.) Do not modify future run behavior. Just this once.\n'
+                '3.) Use pre-existing configuration, change nothing in this or future runs.\n'
+                '4.) Quit.\n'
+                '\n'
+                'What would you like to do? (Please enter a number): ')
             res = int(confirm_overwrite)
 
             if res == 1:
@@ -146,15 +167,20 @@ class Config(object):
             elif res == 3:
                 self.data_path = env['ENVIRONMENT']['data_dir']
             elif res == 4:
-                safe_exit(0)
+                exit_reason = 'User exited while in the "Env Lock Override Confirmation Menu"'
+                safe_exit(exit_reason, code=0,)
 
-            self.file_path = self.data_path
+        self.file_path = self.data_path + '/run/conf/nude-man.conf'
+
+        if not env_class.existing:
+            log.error('')
 
         debug(f'Determined filepath to load from: {self.file_path}')
 
         debug(f'Attempting to load file.')
 
         fp = Path(self.file_path).resolve()
+        print(fp)
 
         if fp.exists():
             try:
@@ -167,7 +193,13 @@ class Config(object):
             self.create_data_dir()
 
             debug(f'Creating new configuration to save to')
-            self.create_config()
 
+            self.conf = self.create_config()
 
-# debug(f'I introduce the following members: {format_members(dir(), False)}')
+        if not self.conf['SETTINGS']['output-dir'] == arg_parser.output_directory:
+            if not env_class.existing:
+                log.warning(
+                    f"Your command-line arguments included a custom application data directory: {arg_parser.output_directory}")
+                log.info()
+
+                # debug(f'I introduce the following members: {format_members(dir(), False)}')
