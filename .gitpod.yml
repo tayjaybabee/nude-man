@@ -1,0 +1,3 @@
+tasks:
+  - init: poetry install
+    command: 'nude-man -s ."'
