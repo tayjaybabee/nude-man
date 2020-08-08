@@ -1,41 +1,43 @@
-==========
-Bug Report
-==========
-(Summarize the bug encountered concisely)
+# Bug Report
 
+## Summary of Issue:
+*Put a brief description of your issue here.*
 
-Steps to reproduce
+## Expected Behavior:
+*Here you can enter what you did (i.e. include command-line commands) and what you expected the program to do in response*
 
-(How one can reproduce the issue - this is very important)
+##  Actual Behavior:
+*Here you can describe what the program actually does in response.*
 
+### Logs/Code Examples:
+*Here you can include some logs showing exactly what happened, or if you're a developer some code examples:*
 
-Example Project
+**Example:**
+I entered the following in my command line:
+```shell
+$> nude-man -s /home/mycomputer/Pictures -o /home/mycomputer/mydocuments/private
+```
 
-(If possible, please create an example project here on GitLab.com that exhibits the problematic behaviour, and link to it here in the bug report)
+I got back:
 
-(If you are using an older version of GitLab, this will also determine whether the bug has been fixed in a more recent version)
+```shell
+InvalidOutputDirError
+```
+## Steps You've Taken to Troubleshoot:
+*Tell us what you did so we don't make you do it again*
 
+ - [ ] Read the [documentation](https://softworks.inspyre.tech/nude-man/docs)
+ - [ ] Looked through the projects [issue page](https://gitlab.com/tayjaybabee/nude-man/issues) for issues like yours
+ - [ ] Another item...
+ - [ ] Etc....
 
-What is the current bug behavior?
+## Helpful Information:
+### Debug Logs:
+*Run nude-man with the '-v' or '--verbose' modifiers and recreate the error, put the logs in the block below:*
 
-(What actually happens)
+```shell
+# Logs go here
+```
 
-
-What is the expected correct behavior?
-
-(What you should see instead)
-
-
-Relevant logs and/or screenshots
-
-(Paste any relevant logs - please use code blocks (```) to format console output,
-logs, and code as it's very hard to read otherwise.)
-
-
-Possible fixes
-
-(If you can, link to the line of code that might be responsible for the problem)
-
-/label ~bug ~reproduced ~needs-investigation
-/cc @project-manager
-/assign @qa-tester
+### Additional Comments:
+*Any additional information that might help troubleshoot this issue?*
