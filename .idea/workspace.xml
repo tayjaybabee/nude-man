@@ -20,12 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="03091591-d125-4312-845b-bfa12b7814fd" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitlab/issue_templates/bug.md" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/nude_man/lib/errors/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nude_man/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/nude_man/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nude_man/lib/config/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/nude_man/lib/config/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nude_man/lib/config/args.py" beforeDir="false" afterPath="$PROJECT_DIR$/nude_man/lib/config/args.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/nude-man" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/nude-man" afterDir="false" />
     </list>
@@ -102,7 +101,7 @@
       <workItem from="1595603906485" duration="2760000" />
       <workItem from="1595616101779" duration="5073000" />
       <workItem from="1596779376113" duration="324000" />
-      <workItem from="1596779776995" duration="2869000" />
+      <workItem from="1596779776995" duration="3582000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1595638135447</created>
@@ -111,7 +110,35 @@
       <option name="project" value="LOCAL" />
       <updated>1595638135447</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Correct misspelling in settings key&#10;&#10;Changed the related key from 'threshhold' to 'threshold', therefore correcting the spelling.">
+      <created>1596858836510</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1596858836510</updated>
+    </task>
+    <task id="LOCAL-00003" summary="update IDE settings">
+      <created>1596858921151</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1596858921151</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Add *.lock files to .gitignore">
+      <created>1596859052110</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1596859052110</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Add *.lock files to .gitignore">
+      <created>1596859108471</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1596859108471</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -131,13 +158,20 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
+    <MESSAGE value="Correct misspelling in settings key&#10;&#10;Changed the related key from 'threshhold' to 'threshold', therefore correcting the spelling." />
+    <MESSAGE value="update IDE settings" />
+    <MESSAGE value="Add *.lock files to .gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add *.lock files to .gitignore" />
   </component>
   <component name="WindowStateProjectService">
     <state x="454" y="211" width="1084" height="711" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1596856409920">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state x="454" y="211" width="1084" height="711" key="#com.intellij.execution.impl.EditConfigurationsDialog/72.27.1848.1053@72.27.1848.1053" timestamp="1596856409920" />
+    <state x="605" y="54" width="772" height="1006" key="CommitChangelistDialog2" timestamp="1596859108489">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="605" y="54" width="772" height="1006" key="CommitChangelistDialog2/72.27.1848.1053@72.27.1848.1053" timestamp="1596859108489" />
     <state x="1236" y="314" width="424" height="491" key="FileChooserDialogImpl" timestamp="1596856339401">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
@@ -162,6 +196,14 @@
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state x="500" y="188" width="992" height="737" key="SettingsEditor/72.27.1848.1053@72.27.1848.1053" timestamp="1596858573371" />
+    <state x="844" y="463" width="293" height="188" key="VCS.ChangelistChooser" timestamp="1596859069449">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="844" y="463" width="293" height="188" key="VCS.ChangelistChooser/72.27.1848.1053@72.27.1848.1053" timestamp="1596859069449" />
+    <state x="876" y="466" width="229" height="181" key="VCS.EditChangelistDialog" timestamp="1596859077895">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="876" y="466" width="229" height="181" key="VCS.EditChangelistDialog/72.27.1848.1053@72.27.1848.1053" timestamp="1596859077895" />
     <state x="591" y="285" width="800" height="543" key="Vcs.Push.Dialog.v2" timestamp="1595638173221">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
