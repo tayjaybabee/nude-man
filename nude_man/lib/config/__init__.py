@@ -108,7 +108,7 @@ class Config(object):
                 'output-dir': out_dir,
                 'input-dir': in_dir,
                 'api-key': api_key,
-                'threshhold': threshold
+                'threshold': threshold
 
             },
 
