@@ -1,4 +1,5 @@
 # Developer Task [General Corrections-Code Affecting]
+*Issue template for general code corrections that may affect calls. This is for tasks that are not specifically related to any issue.*
 
 ## Cause for Correction:
 *Why should this be corrected?*
