@@ -41,3 +41,8 @@ InvalidOutputDirError
 
 ### Additional Comments:
 *Any additional information that might help troubleshoot this issue?*
+
+/label ~bug ~needs-investigation
+/cc @tayjaybabee
+/assign @tayjaybabee
+
