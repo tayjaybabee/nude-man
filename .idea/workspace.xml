@@ -1,11 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="03091591-d125-4312-845b-bfa12b7814fd" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/nude_man/lib/errors/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nude_man/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/nude_man/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nude_man/lib/config/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/nude_man/lib/config/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nude_man/lib/config/args.py" beforeDir="false" afterPath="$PROJECT_DIR$/nude_man/lib/config/args.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/nude-man" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/nude-man" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -26,6 +47,7 @@
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="2" />
   </component>
+  <component name="JupyterTrust" id="abfd4eac-aec5-444e-b18b-029b06173e2c" />
   <component name="ProjectId" id="1f8dxjiIfATlMQPEil1NtxxeJCp" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -38,10 +60,35 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/scripts" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyIntegratedToolsModulesConfigurable" />
+    <property name="settings.editor.selected.configurable" value="GitLabConfigurableProvider" />
   </component>
+  <component name="RunManager">
+    <configuration name="Run Nude-Man" type="PythonConfigurationType" factoryName="Python">
+      <module name="nude-man" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$USER_HOME$/.cache/pypoetry/virtualenvs/nude-man-9KB3xYEO-py3.8/bin/python3" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/nude-man" />
+      <option name="PARAMETERS" value="-v -s $USER_HOME$/Pictures" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="true" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -54,6 +101,8 @@
       <updated>1595603902871</updated>
       <workItem from="1595603906485" duration="2760000" />
       <workItem from="1595616101779" duration="5073000" />
+      <workItem from="1596779376113" duration="324000" />
+      <workItem from="1596779776995" duration="2869000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1595638135447</created>
@@ -66,24 +115,59 @@
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit" />
     <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1236" y="314" width="424" height="491" key="FileChooserDialogImpl" timestamp="1595637882239">
+    <state x="454" y="211" width="1084" height="711" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1596856409920">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state x="1236" y="314" width="424" height="491" key="FileChooserDialogImpl/72.27.1848.1053@72.27.1848.1053" timestamp="1595637882239" />
-    <state x="500" y="188" width="992" height="737" key="SettingsEditor" timestamp="1595606048500">
+    <state x="454" y="211" width="1084" height="711" key="#com.intellij.execution.impl.EditConfigurationsDialog/72.27.1848.1053@72.27.1848.1053" timestamp="1596856409920" />
+    <state x="1236" y="314" width="424" height="491" key="FileChooserDialogImpl" timestamp="1596856339401">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state x="500" y="188" width="992" height="737" key="SettingsEditor/72.27.1848.1053@72.27.1848.1053" timestamp="1595606048500" />
+    <state x="1236" y="314" width="424" height="491" key="FileChooserDialogImpl/72.27.1848.1053@72.27.1848.1053" timestamp="1596856339401" />
+    <state width="766" height="257" key="GridCell.Tab.0.bottom" timestamp="1596856684090">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state width="766" height="257" key="GridCell.Tab.0.bottom/72.27.1848.1053@72.27.1848.1053" timestamp="1596856684090" />
+    <state width="766" height="257" key="GridCell.Tab.0.center" timestamp="1596856684089">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state width="766" height="257" key="GridCell.Tab.0.center/72.27.1848.1053@72.27.1848.1053" timestamp="1596856684089" />
+    <state width="766" height="257" key="GridCell.Tab.0.left" timestamp="1596856684088">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state width="766" height="257" key="GridCell.Tab.0.left/72.27.1848.1053@72.27.1848.1053" timestamp="1596856684088" />
+    <state width="766" height="257" key="GridCell.Tab.0.right" timestamp="1596856684089">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state width="766" height="257" key="GridCell.Tab.0.right/72.27.1848.1053@72.27.1848.1053" timestamp="1596856684089" />
+    <state x="500" y="188" width="992" height="737" key="SettingsEditor" timestamp="1596858573371">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="500" y="188" width="992" height="737" key="SettingsEditor/72.27.1848.1053@72.27.1848.1053" timestamp="1596858573371" />
     <state x="591" y="285" width="800" height="543" key="Vcs.Push.Dialog.v2" timestamp="1595638173221">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state x="591" y="285" width="800" height="543" key="Vcs.Push.Dialog.v2/72.27.1848.1053@72.27.1848.1053" timestamp="1595638173221" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/nude_man$Run_Nude_Man.coverage" NAME="Run Nude-Man Coverage Results" MODIFIED="1596856412375" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
