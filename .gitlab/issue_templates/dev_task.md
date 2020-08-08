@@ -1,6 +1,4 @@
-
-
 /label ~dev-task
-/cc @project-manager
-/assign @qa-tester
+/cc @tayjaybabee
+/assign @tayjaybabee
 /confidential
